@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Windows;
+using MySql.Data.MySqlClient;
+
+namespace Biblioteka
+{
+    public partial class Library : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private MySqlConnection connect()
+        {
+            lInfo.Text = "Connecting 1...";
+            string ConnectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=xd";
+
+            MySqlConnection connection = new MySqlConnection(ConnectionString);
+            //MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+
+            try 
+            {
+                lInfo.Text = "Connecting 2...";
+                connection.Open();
+                lInfo.Text = "Connected";
+                return connection;
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                lInfo.Text = "ERROR";
+            }
+            return null;
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            string author = txtAuthor.Text;
+            string title = txtTitle.Text;
+
+            if(author == "")
+            {
+                lInfo.Text = "Please insert the author";
+                return;
+            }
+            if (title == "")
+            {
+                lInfo.Text = "Please insert the title";
+                return;
+            }
+
+            MySqlConnection conn = connect();
+            if(conn == null)
+            {
+                lInfo.Text = "ERROR";
+                return;
+            }
+            MySqlCommand command = conn.CreateCommand();
+            command.CommandText = ; 
+        }
+    }
+}
